@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Durham Middle School Orchestra Website
 
-## Getting Started
+The website uses Next.js App Router, React, and TypeScript. Frontend content and reusable JSX components live in `src/`; route entry points live in `app/`.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Use `npm run build` to create a production build and `npm start` to serve it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` — Home
+- `/directors`
+- `/new-to-orchestra`
+- `/getting-an-instrument`
+- `/returning-members`
+- `/uil`
+- `/api/events` — event data from `data/events.json`
 
-## Learn More
+## Site content
 
-To learn more about Next.js, take a look at the following resources:
+Page copy, navigation, and editable lists are in `src/data/site.js`. Event records are in `data/events.json`; update that file to change the events returned by the API. Place public documents and photos under `public/` and reference them by URL.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Director CMS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The director editing area is available at `/login`; after signing in, open `/admin` to edit page content, events, navigation, and footer settings. Drafts are saved in Supabase and published revisions are served on the public site.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To connect Supabase, copy `.env.example` to `.env.local`, set the public Supabase URL and publishable key, then apply the SQL migration in `supabase/migrations/`. Follow [the CMS setup guide](docs/cms-setup.md) to configure the database, storage bucket, and director account. Without Supabase configuration, the public site uses its built-in content and admin APIs remain unavailable.
