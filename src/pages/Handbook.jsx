@@ -4,11 +4,13 @@ import ContactCards from "../components/ContactCards.jsx";
 import PageHeader from "../components/PageHeader.jsx";
 import Section from "../components/Section.jsx";
 import { HANDBOOK } from "../data/site.js";
+import { useLanguage } from "../i18n/LanguageProvider.jsx";
 
 export default function Handbook() {
+  const { t } = useLanguage();
   return (
     <div className="handbook-page">
-      <PageHeader title={HANDBOOK.title} />
+      <PageHeader title={t(HANDBOOK.title)} />
       <Section>
         <div className="grid handbook-grid">
           {HANDBOOK.documents.map((doc) => (
@@ -23,7 +25,7 @@ export default function Handbook() {
           ))}
         </div>
       </Section>
-      <Section title={HANDBOOK.highlightsTitle}>
+      <Section title={t(HANDBOOK.highlightsTitle)}>
         <Accordion items={HANDBOOK.highlights} singleOpen />
       </Section>
       <ContactCards title={HANDBOOK.contactTitle} />

@@ -1,0 +1,4 @@
+project_id = "durham-orchestra"
+
+[functions.calendar-events]
+verify_jwt = false

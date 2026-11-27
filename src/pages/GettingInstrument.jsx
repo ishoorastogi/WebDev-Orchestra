@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/LanguageProvider.jsx";
 import Accordion from "../components/Accordion.jsx";
 import Card from "../components/Card.jsx";
 import ContactCards from "../components/ContactCards.jsx";
@@ -16,18 +17,19 @@ const FAQ = [
 
 // steps + rentals
 export default function GettingInstrument() {
+  const { t } = useLanguage();
   return (
     <>
-      <PageHeader title="Getting an Instrument" intro="Rent from a local company or ask about a school instrument." />
-      <Section title="Steps"><Steps items={INSTRUMENT_STEPS} /></Section>
-      <Section title="Rental options">
+      <PageHeader title={t("Getting an Instrument")} intro={t("Rent from a local company or ask about a school instrument.")} />
+      <Section title={t("Steps")}><Steps items={INSTRUMENT_STEPS} /></Section>
+      <Section title={t("Rental options")}>
         <div className="grid grid-3">
           {RENTALS.map((r) => (
-            <Card key={r.name} title={r.name} to={r.to} href={r.href} cta={r.cta}>{r.text}</Card>
+            <Card key={r.name} title={t(r.name)} to={r.to} href={r.href} cta={t(r.cta)}>{t(r.text)}</Card>
           ))}
         </div>
       </Section>
-      <Section title="FAQ"><Accordion items={FAQ} /></Section>
+      <Section title={t("FAQ")}><Accordion items={FAQ} /></Section>
       <ContactCards />
     </>
   );

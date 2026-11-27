@@ -29,9 +29,6 @@ body {
   color: var(--charcoal);
   background: var(--bg);
 }
-/* google translate adds a top banner; hide it */
-body { top: 0 !important; }
-.skiptranslate iframe, .goog-te-banner-frame { display: none !important; }
 
 h1, h2, h3 { font-family: var(--font-display); color: var(--charcoal); line-height: 1.15; margin: 0 0 12px; }
 h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
@@ -81,6 +78,7 @@ img { max-width: 100%; display: block; }
 .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
 .lang { display: flex; border: 1.5px solid var(--maroon); border-radius: var(--radius-btn); overflow: hidden; }
 .lang button { border: 0; background: var(--white); color: var(--maroon); padding: 6px 12px; font: 700 14px var(--font-body); cursor: pointer; }
+.lang button:focus-visible { outline-color: currentColor; outline-offset: -3px; }
 .lang button[aria-pressed="true"] { background: var(--maroon); color: var(--white); }
 .nav-toggle { display: none; background: var(--white); border: 1.5px solid var(--maroon); color: var(--maroon); border-radius: var(--radius-btn); padding: 8px 12px; font-weight: 700; cursor: pointer; }
 .nav-links { list-style: none; display: flex; gap: 8px; margin: 0 auto; padding: 0 24px 8px; max-width: var(--max); }
@@ -188,7 +186,8 @@ img { max-width: 100%; display: block; }
   .split.flip > :first-child { order: 0; }
   .panel { padding: 28px; }
   .nav-toggle { display: inline-block; min-height: 44px; }
-  .brand-name { font-size: 1.1rem; }
+  .brand { min-width: 0; }
+  .brand-name { font-size: 1.1rem; overflow-wrap: anywhere; }
   .nav-links { display: none; flex-direction: column; gap: 0; padding-bottom: 16px; }
   .nav-links.open { display: flex; }
   .nav-links a, .nav-links button { display: flex; align-items: center; gap: 4px; min-height: 44px; }

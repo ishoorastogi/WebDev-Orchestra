@@ -1,5 +1,7 @@
+import { useLanguage } from "../i18n/LanguageProvider.jsx";
 // yt embed, no cookies
 export default function Video({ videoId, title }) {
+  const { t } = useLanguage();
   return (
     <div className="video">
       {/* placeholder if no id */}
@@ -12,7 +14,7 @@ export default function Video({ videoId, title }) {
           allowFullScreen
         />
       ) : (
-        <div className="empty">Video coming soon: {title}</div>
+        <div className="empty">{t("Video coming soon: {title}", { title })}</div>
       )}
     </div>
   );

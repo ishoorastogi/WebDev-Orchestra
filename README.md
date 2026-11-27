@@ -10,7 +10,7 @@ npm run build      # production build in dist/
 ```
 
 ## Edit content
-All page text, links, and lists live in `src/data/site.js`. Replace anything in [brackets].
+Shared content, links, and lists live in `src/data/site.js`. Page-specific copy is in `src/pages/`. Replace anything in [brackets].
 Set `BOOSTER_URL` and `DIRECTOR_EMAIL` there first.
 
 ## Add files
@@ -26,6 +26,6 @@ Open `/handbook` from **Resources → Handbook** in the navbar, the home page qu
 - To add more Resources links, add `{ label: "Link text", to: "/path" }` entries to the Resources item's `children` in `NAV` in `src/data/site.js`. Register new page routes in `src/App.jsx`.
 
 ## Notes
-- The EN/ES toggle uses Google Translate (machine translation).
+- The EN/ES toggle uses Spanish translations in `src/i18n/spanish.js`. When editing English copy, update the corresponding Spanish entry. New text displays in English until a Spanish translation is added.
 - `<Photo />` blocks right-click and dragging, which only deters casual saving.
 - When hosting, set the host to serve `index.html` for all routes (single-page app rewrite).

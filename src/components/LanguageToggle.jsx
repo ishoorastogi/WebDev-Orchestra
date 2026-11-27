@@ -1,24 +1,12 @@
-import { useState } from "react";
-
-// en/es toggle — UI only for now. translation is not wired up yet.
-// the buttons switch their active state but nothing on the page changes.
-// TODO: add real translation in setLanguage() below.
-//   (previous version used the google translate widget via a "googtrans" cookie + page reload)
+import { useLanguage } from "../i18n/LanguageProvider.jsx";
 
 export default function LanguageToggle() {
-  const [lang, setLang] = useState("en");
+  const { language, setLanguage, t } = useLanguage();
 
-  function setLanguage(next) {
-    setLang(next);
-    // TODO: translation logic goes here
-  }
-
-  // en/es btns
   return (
-    <div className="lang" role="group" aria-label="Language">
-      <button aria-pressed={lang === "en"} onClick={() => setLanguage("en")}>EN</button>
-      <button aria-pressed={lang === "es"} onClick={() => setLanguage("es")}>ES</button>
-      <button aria-pressed={lang === "idk"} onClick={() => setLanguage("idk")}>IDK</button>
+    <div className="lang" role="group" aria-label={t("Language")}>
+      <button type="button" lang="en" aria-label="English" aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
+      <button type="button" lang="es" aria-label="Español" aria-pressed={language === "es"} onClick={() => setLanguage("es")}>ES</button>
     </div>
   );
 }

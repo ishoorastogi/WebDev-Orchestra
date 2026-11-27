@@ -1,19 +1,10 @@
 ﻿import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../i18n/LanguageProvider.jsx";
 import "../styles/Calendar.css";
 
-const weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const central = "America/Chicago";
 const centralDate = new Intl.DateTimeFormat("en-US", {
   timeZone: central, year: "numeric", month: "2-digit", day: "2-digit",
-});
-const monthLabel = new Intl.DateTimeFormat("en-US", {
-  timeZone: "UTC", month: "long", year: "numeric",
-});
-const allDayLabel = new Intl.DateTimeFormat("en-US", {
-  timeZone: "UTC", dateStyle: "long",
-});
-const eventTime = new Intl.DateTimeFormat("en-US", {
-  timeZone: central, dateStyle: "medium", timeStyle: "short",
 });
 
 // Date cells use UTC as a date-only representation. Event instants use Central time.
@@ -35,6 +26,9 @@ function currentMonthStart() {
 }
 
 function EventDetails({ event, onClose }) {
+  const { locale, t } = useLanguage();
+  const allDayLabel = new Intl.DateTimeFormat(locale, { timeZone: "UTC", dateStyle: "long" });
+  const eventTime = new Intl.DateTimeFormat(locale, { timeZone: central, dateStyle: "medium", timeStyle: "short" });
   const dialog = useRef(null);
 
   useEffect(() => {
@@ -51,17 +45,23 @@ function EventDetails({ event, onClose }) {
   return (
     <dialog ref={dialog} className="calendar-event-dialog" aria-labelledby="calendar-event-title" onClose={onClose}>
       <h2 id="calendar-event-title">{event.title}</h2>
-      <p>{when} · {event.allDay ? "All day" : "Central time"}</p>
+      <p>{when} · {t(event.allDay ? "All day" : "Central time")}</p>
       {event.location && <p>{event.location}</p>}
       {event.description && <p className="calendar-event-description">{event.description}</p>}
       <form method="dialog">
-        <button type="submit">Close</button>
+        <button type="submit">{t("Close")}</button>
       </form>
     </dialog>
   );
 }
 
 export default function Calendar() {
+  const { locale, t } = useLanguage();
+  const monthLabel = new Intl.DateTimeFormat(locale, { timeZone: "UTC", month: "long", year: "numeric" });
+  const weekdayLabel = new Intl.DateTimeFormat(locale, { timeZone: "UTC", weekday: "short" });
+  const weekdays = Array.from({ length: 7 }, (_, index) =>
+    weekdayLabel.format(dateCell(2024, 0, 7 + index)).replace(/\.$/, "").toLocaleUpperCase(locale),
+  );
   const [currentMonth, setCurrentMonth] = useState(currentMonthStart);
   const [result, setResult] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -80,7 +80,9 @@ export default function Calendar() {
 
     async function loadEvents() {
       try {
-        const response = await fetch(`/api/calendar/events?${query}`, { signal: controller.signal });
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim().replace(/\/+$/, "");
+        const endpoint = supabaseUrl ? `${supabaseUrl}/functions/v1/calendar-events` : "/api/calendar/events";
+        const response = await fetch(`${endpoint}?${query}`, { signal: controller.signal });
         if (!response.ok) throw new Error("Calendar request failed");
         const events = await response.json();
         if (!Array.isArray(events)) throw new Error("Invalid calendar response");
@@ -108,8 +110,8 @@ export default function Calendar() {
     <div className="calendar-page">
       <section className="calendar-hero">
         <div className="calendar-container">
-          <h1>Calendar</h1>
-          <p>Concerts, contests, and important dates.</p>
+          <h1>{t("Calendar")}</h1>
+          <p>{t("Concerts, contests, and important dates.")}</p>
         </div>
       </section>
 
@@ -119,15 +121,15 @@ export default function Calendar() {
             <div className="calendar-toolbar">
               <h2>{monthLabel.format(currentMonth)}</h2>
               <div className="calendar-controls">
-                <button type="button" onClick={() => changeMonth(-1)} aria-label="Previous month">‹</button>
-                <button type="button" onClick={() => setCurrentMonth(currentMonthStart())}>Today</button>
-                <button type="button" onClick={() => changeMonth(1)} aria-label="Next month">›</button>
+                <button type="button" onClick={() => changeMonth(-1)} aria-label={t("Previous month")}>‹</button>
+                <button type="button" onClick={() => setCurrentMonth(currentMonthStart())}>{t("Today")}</button>
+                <button type="button" onClick={() => changeMonth(1)} aria-label={t("Next month")}>›</button>
               </div>
             </div>
             <div role="status">
-              {!activeResult && <p className="calendar-status">Loading events…</p>}
-              {activeResult?.error && <p className="calendar-status">Calendar events are unavailable. Please try again later.</p>}
-              {activeResult?.events && !hasMonthEvents && <p className="calendar-status">No events this month.</p>}
+              {!activeResult && <p className="calendar-status">{t("Loading events…")}</p>}
+              {activeResult?.error && <p className="calendar-status">{t("Calendar events are unavailable. Please try again later.")}</p>}
+              {activeResult?.events && !hasMonthEvents && <p className="calendar-status">{t("No events this month.")}</p>}
             </div>
             <div className="calendar-weekdays">
               {weekdays.map((day) => <div key={day}>{day}</div>)}
