@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { NAV, SCHOOL, BOOSTER_URL, DIRECTOR_EMAIL } from "../data/site.js";
+import { NAV, SCHOOL, BOOSTER_URL, DIRECTOR_EMAIL, HANDBOOK_LINK } from "../data/site.js";
 
 export default function Footer() {
-  // top-level links only
-  const pages = NAV.filter((n) => n.to);
+  const pages = [...NAV.filter((n) => n.to), HANDBOOK_LINK];
   return (
     <footer className="footer">
       <div className="container footer-grid">

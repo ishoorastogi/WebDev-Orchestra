@@ -6,6 +6,7 @@ import NewToOrchestra from "./pages/NewToOrchestra.jsx";
 import GettingInstrument from "./pages/GettingInstrument.jsx";
 import ReturningMembers from "./pages/ReturningMembers.jsx";
 import Uil from "./pages/Uil.jsx";
+import Handbook from "./pages/Handbook.jsx";
 
 // all routes live here
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="getting-an-instrument" element={<GettingInstrument />} />
         <Route path="returning-members" element={<ReturningMembers />} />
         <Route path="uil" element={<Uil />} />
+        <Route path="handbook" element={<Handbook />} />
         <Route path="*" element={<Home />} />
       </Route>
     </Routes>

@@ -85,9 +85,10 @@ img { max-width: 100%; display: block; }
 .nav-toggle { display: none; background: var(--white); border: 1.5px solid var(--maroon); color: var(--maroon); border-radius: var(--radius-btn); padding: 8px 12px; font-weight: 700; cursor: pointer; }
 .nav-links { list-style: none; display: flex; gap: 24px; margin: 0 auto; padding: 0 24px 8px; max-width: var(--max); }
 .nav-links > li { position: relative; }
-.nav-links a, .nav-links button { color: var(--maroon); font: 700 14px var(--font-body); text-decoration: none; background: none; border: 0; padding: 8px 0; cursor: pointer; border-bottom: 3px solid transparent; }
+.nav-links a, .nav-links button { display: inline-block; vertical-align: top; color: var(--maroon); font: 700 14px var(--font-body); text-decoration: none; background: none; border: 0; padding: 8px 0; cursor: pointer; border-bottom: 3px solid transparent; }
 .nav-links a.active, .nav-links button.active { border-bottom-color: var(--maroon); }
 .dropdown { position: absolute; top: 100%; left: 0; min-width: 240px; background: var(--white); box-shadow: var(--shadow); border-radius: var(--radius-card); list-style: none; margin: 0; padding: 8px; z-index: 60; }
+.nav-links > li:last-child > .dropdown { left: auto; right: 0; }
 .dropdown a { display: block; padding: 10px 12px; border: 0; }
 .dropdown a:hover { background: var(--blush); }
 
@@ -133,6 +134,38 @@ img { max-width: 100%; display: block; }
 .faq details[open] summary::after { content: "\2212"; }
 .faq details p { margin: 12px 0 0; }
 
+/* Orchestra handbook */
+.handbook-page .page-header { padding-block: clamp(44px, 4.6vw, 64px); }
+.handbook-grid { grid-template-columns: repeat(2, minmax(0, 336px)); justify-content: center; gap: 32px; }
+.handbook-card {
+  aspect-ratio: 1 / 1;
+  padding: clamp(16px, 5vw, 24px);
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  background: var(--maroon);
+  color: var(--white);
+  border-radius: var(--radius-panel);
+}
+.handbook-card h2 { color: inherit; margin: 0; font-size: clamp(1.5rem, 3vw, 1.875rem); }
+.handbook-language-badge {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 2px 12px;
+  color: var(--blush);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.handbook-card-actions { display: grid; justify-items: center; gap: 8px; }
+.handbook-card-actions .btn { display: grid; place-items: center; min-height: 44px; }
+.handbook-page .page-header :focus-visible,
+.handbook-card :focus-visible { outline-color: var(--white); }
+.handbook-page .faq details { padding: 0; }
+.handbook-page .faq summary { gap: 16px; padding: 16px 0; }
+.handbook-page .faq details p { margin: 0 0 16px; }
+
 /* video */
 /* 16:9 video box */
 .video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-card); overflow: hidden; background: #e9e9e9; border: 1.5px solid #cfcfcf; }
@@ -149,12 +182,17 @@ img { max-width: 100%; display: block; }
 /* responsive */
 @media (max-width: 960px) {
   .grid-3, .grid-4, .grid-2, .split, .panel, .footer-grid { grid-template-columns: 1fr; }
+  .handbook-grid { grid-template-columns: minmax(0, 336px); }
   .split.flip > :first-child { order: 0; }
   .panel { padding: 28px; }
-  .nav-toggle { display: inline-block; }
+  .nav-toggle { display: inline-block; min-height: 44px; }
   .brand-name { font-size: 1.1rem; }
   .nav-links { display: none; flex-direction: column; gap: 0; padding-bottom: 16px; }
   .nav-links.open { display: flex; }
+  .nav-links a, .nav-links button { display: flex; align-items: center; gap: 4px; min-height: 44px; }
   .dropdown { position: static; box-shadow: none; padding-left: 16px; }
+}
+@media (max-width: 480px) {
+  .nav-top { flex-wrap: wrap; gap: 8px 16px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
