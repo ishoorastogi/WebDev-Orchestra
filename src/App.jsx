@@ -7,6 +7,7 @@ import GettingInstrument from "./pages/GettingInstrument.jsx";
 import ReturningMembers from "./pages/ReturningMembers.jsx";
 import Uil from "./pages/Uil.jsx";
 import Handbook from "./pages/Handbook.jsx";
+import Calendar from "./pages/Calendar.jsx";
 
 // all routes live here
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="returning-members" element={<ReturningMembers />} />
         <Route path="uil" element={<Uil />} />
         <Route path="handbook" element={<Handbook />} />
+        <Route path="calendar" element={<Calendar />} />
         <Route path="*" element={<Home />} />
       </Route>
     </Routes>

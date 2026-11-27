@@ -15,6 +15,7 @@ export const NAV = [
   { label: "Returning Members", to: "/returning-members" },
   { label: "UIL & Groups", to: "/uil" },
   { label: "Resources", children: [HANDBOOK_LINK] },
+  { label: "Calendar", to: "/calendar" },
 ];
 
 // dir info, edit here
