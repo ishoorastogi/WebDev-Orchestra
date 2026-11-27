@@ -4,6 +4,8 @@
 export const SCHOOL = "Durham Middle School Orchestra";
 export const BOOSTER_URL = "https://example.com/booster"; // todo: existing booster website
 export const DIRECTOR_EMAIL = "director@example.org"; // todo
+export const HANDBOOK_LINK = { label: "Handbook", to: "/handbook" };
+export const CALENDAR_LINK = { label: "Calendar", to: "/calendar" };
 
 // nav links, children = dropdown
 export const NAV = [
@@ -13,7 +15,7 @@ export const NAV = [
   { label: "Getting an Instrument", to: "/getting-an-instrument" },
   { label: "Returning Members", to: "/returning-members" },
   { label: "UIL & Groups", to: "/uil" },
-  { label: "Calendar", to: "/calendar" },
+  { label: "Resources", children: [HANDBOOK_LINK, CALENDAR_LINK] },
 ];
 
 // dir info, edit here
@@ -75,4 +77,35 @@ export const DOCUMENTS = [
   { name: "[Form name]", href: "/forms/form-2.pdf" },
   { name: "[Form name]", href: "/forms/form-3.pdf" },
 ];
+
+export const HANDBOOK = {
+  title: "Orchestra Handbook",
+  documents: [
+    {
+      lang: "en",
+      badge: "ENGLISH",
+      title: "English Handbook",
+      href: "/forms/handbook-en.pdf",
+      downloadLabel: "Download PDF",
+      viewLabel: "View PDF",
+    },
+    {
+      lang: "es",
+      badge: "ESPAÑOL",
+      title: "Manual en Español",
+      href: "/forms/handbook-es.pdf",
+      downloadLabel: "Descargar PDF",
+      viewLabel: "Ver PDF",
+    },
+  ],
+  highlightsTitle: "Highlights",
+  highlights: [
+    { q: "Attendance and rehearsals", a: "Attendance and rehearsal expectations will be provided in the official orchestra handbook." },
+    { q: "Grading", a: "Orchestra grading policies and assessment requirements will be provided in the official orchestra handbook." },
+    { q: "Concert dress", a: "Concert attire requirements will be provided in the official orchestra handbook." },
+    { q: "Practice expectations", a: "Practice guidelines and expectations will be provided in the official orchestra handbook." },
+    { q: "Instrument care", a: "Instrument care and maintenance guidelines will be provided in the official orchestra handbook." },
+  ],
+  contactTitle: "Questions?",
+};
 

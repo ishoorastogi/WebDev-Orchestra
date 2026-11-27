@@ -3,7 +3,7 @@ import Card from "../components/Card.jsx";
 import CtaBand from "../components/CtaBand.jsx";
 import Photo from "../components/Photo.jsx";
 import Section from "../components/Section.jsx";
-import { SCHOOL } from "../data/site.js";
+import { HANDBOOK_LINK, SCHOOL } from "../data/site.js";
 
 // landing page
 export default function Home() {
@@ -25,10 +25,11 @@ export default function Home() {
       </Section>
       {/* quick links */}
       <Section title="Quick links">
-        <div className="grid grid-3">
+        <div className="grid grid-4">
           <Card title="New to Orchestra" to="/new-to-orchestra" cta="Learn more">Meet the instruments and pick one.</Card>
           <Card title="Returning Members" to="/returning-members" cta="Get started">Re-enrollment, auditions, and dates.</Card>
           <Card title="Getting an Instrument" to="/getting-an-instrument" cta="Rent or borrow">Rental options and school instruments.</Card>
+          <Card title={HANDBOOK_LINK.label} to={HANDBOOK_LINK.to} cta="Open handbook">View or download the handbook in English or Spanish.</Card>
         </div>
       </Section>
       {/* gallery, view only */}
