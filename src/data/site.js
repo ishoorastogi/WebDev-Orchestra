@@ -13,6 +13,7 @@ export const NAV = [
   { label: "Getting an Instrument", to: "/getting-an-instrument" },
   { label: "Returning Members", to: "/returning-members" },
   { label: "UIL & Groups", to: "/uil" },
+  { label: "Calendar", to: "/calendar" },
 ];
 
 // dir info, edit here
