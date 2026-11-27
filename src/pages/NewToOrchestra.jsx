@@ -6,43 +6,45 @@ import InstrumentFeature from "../components/InstrumentFeature.jsx";
 import PageHeader from "../components/PageHeader.jsx";
 import Photo from "../components/Photo.jsx";
 import Section from "../components/Section.jsx";
-import { INSTRUMENTS, INSTRUMENT_FAQ } from "../data/site.js";
+import { INSTRUMENTS, INSTRUMENT_FAQ, NEW_TO_ORCHESTRA_PAGE } from "../data/site.js";
 
 // intro + inst videos + faq
 export default function NewToOrchestra() {
+  const { header, welcome, instrumentsHeading, sizing, faqHeading, cta } = NEW_TO_ORCHESTRA_PAGE;
+
   return (
     <>
-      <PageHeader title="New to Orchestra" intro="No experience needed. Meet the instruments, listen, and pick your favorite." />
-      <Section title="Welcome, new players!">
+      <PageHeader {...header} />
+      <Section title={welcome.heading}>
         <div className="split">
           <div>
-            <h3>No experience needed</h3>
-            <p>[How class works and what the first year looks like.]</p>
-            <p>Already in orchestra? <Link to="/returning-members">Returning members start here.</Link></p>
-            <Button to="/getting-an-instrument">Getting an Instrument</Button>
+            <h3>{welcome.title}</h3>
+            <p>{welcome.text}</p>
+            <p>{welcome.returningPrompt}{" "}<Link to="/returning-members">{welcome.returningLabel}</Link></p>
+            <Button to="/getting-an-instrument">{welcome.instrumentLabel}</Button>
           </div>
-          <Photo label="Photo: beginner class" height={240} />
+          <Photo {...welcome.photo} height={240} />
         </div>
       </Section>
-      <Section title="Meet the instruments">
+      <Section title={instrumentsHeading}>
         <div className="stack">
           {/* alt left/right */}
           {INSTRUMENTS.map((inst, i) => (
-            <InstrumentFeature key={inst.name} {...inst} flip={i % 2 === 1} />
+            <InstrumentFeature key={inst.id} {...inst} flip={i % 2 === 1} />
           ))}
         </div>
       </Section>
       <Section>
         <div className="callout">
-          <h3>Any height can play</h3>
-          <p>Every instrument comes in multiple sizes, so students of any height can play any instrument.</p>
+          <h3>{sizing.title}</h3>
+          <p>{sizing.text}</p>
         </div>
       </Section>
-      <Section title="FAQ">
+      <Section title={faqHeading}>
         <Accordion items={INSTRUMENT_FAQ} />
       </Section>
       <Section>
-        <CtaBand title="Ready to pick an instrument?" actions={[{ label: "Getting an Instrument", to: "/getting-an-instrument" }]} />
+        <CtaBand title={cta.title} actions={[{ id: "find-an-instrument", label: cta.label, to: "/getting-an-instrument" }]} />
       </Section>
     </>
   );

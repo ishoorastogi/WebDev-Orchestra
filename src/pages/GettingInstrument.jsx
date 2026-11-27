@@ -4,30 +4,24 @@ import ContactCards from "../components/ContactCards.jsx";
 import PageHeader from "../components/PageHeader.jsx";
 import Section from "../components/Section.jsx";
 import Steps from "../components/Steps.jsx";
-import { INSTRUMENT_STEPS, RENTALS } from "../data/site.js";
-
-// local faq items
-const FAQ = [
-  { q: "Monthly vs. yearly payment", a: "Renting by the year costs less than paying monthly. [Add details.]" },
-  { q: "Instrument sizes", a: "Each instrument comes in multiple sizes. The directors help you pick one." },
-  { q: "Supplies checklist", a: "[List the supplies every student needs.]" },
-  { q: "Who do I contact?", a: "Email the directors using the contacts below." },
-];
+import { GETTING_AN_INSTRUMENT_PAGE, INSTRUMENT_STEPS, RENTALS } from "../data/site.js";
 
 // steps + rentals
 export default function GettingInstrument() {
+  const { header, stepsHeading, rentalsHeading, faq } = GETTING_AN_INSTRUMENT_PAGE;
+
   return (
     <>
-      <PageHeader title="Getting an Instrument" intro="Rent from a local company or ask about a school instrument." />
-      <Section title="Steps"><Steps items={INSTRUMENT_STEPS} /></Section>
-      <Section title="Rental options">
+      <PageHeader {...header} />
+      <Section title={stepsHeading}><Steps items={INSTRUMENT_STEPS} /></Section>
+      <Section title={rentalsHeading}>
         <div className="grid grid-3">
           {RENTALS.map((r) => (
-            <Card key={r.name} title={r.name} to={r.to} href={r.href} cta={r.cta}>{r.text}</Card>
+            <Card key={r.id} title={r.name} to={r.to} href={r.href} cta={r.cta}>{r.text}</Card>
           ))}
         </div>
       </Section>
-      <Section title="FAQ"><Accordion items={FAQ} /></Section>
+      <Section title={faq.heading}><Accordion items={faq.items} /></Section>
       <ContactCards />
     </>
   );

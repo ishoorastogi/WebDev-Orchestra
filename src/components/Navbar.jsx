@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { NAV, SCHOOL } from "../data/site.js";
+import { NAV, SCHOOL, SHARED_CONTENT } from "../data/site.js";
 import LanguageToggle from "./LanguageToggle.jsx";
 
 export default function Navbar() {
+  const { logo, mainLabel, menuLabel } = SHARED_CONTENT.navigation;
   // mobile menu open?
   const [open, setOpen] = useState(false);
   // which dropdown is open
@@ -37,35 +38,37 @@ export default function Navbar() {
       <div className="nav-top">
         {/* logo + name */}
         <Link to="/" className="brand">
-          <span className="brand-logo" aria-hidden="true">LOGO</span>
+          <span className="brand-logo" aria-hidden={logo.src && logo.alt ? undefined : true}>
+            {logo.src ? <img src={logo.src} alt={logo.alt} /> : logo.label}
+          </span>
           <span className="brand-name">{SCHOOL}</span>
         </Link>
         {/* lang + menu btn */}
         <div className="nav-actions">
           <LanguageToggle />
           <button className="nav-toggle" aria-expanded={open} aria-controls="site-nav" onClick={() => setOpen(!open)}>
-            Menu
+            {menuLabel}
           </button>
         </div>
       </div>
-      <nav aria-label="Main">
+      <nav aria-label={mainLabel}>
         {/* main links */}
         <ul id="site-nav" className={`nav-links${open ? " open" : ""}`}>
           {NAV.map((item) =>
             item.children ? (
-              <li key={item.label}>
+              <li key={item.id}>
                 <button
                   className={item.children.some((c) => c.to === pathname) ? "active" : ""}
                   aria-haspopup="true"
-                  aria-expanded={menu === item.label}
-                  onClick={() => setMenu(menu === item.label ? null : item.label)}
+                  aria-expanded={menu === item.id}
+                  onClick={() => setMenu(menu === item.id ? null : item.id)}
                 >
                   {item.label} &#9662;
                 </button>
-                {menu === item.label && (
+                {menu === item.id && (
                   <ul className="dropdown">
                     {item.children.map((c) => (
-                      <li key={c.to}>
+                      <li key={c.id}>
                         <NavLink to={c.to}>{c.label}</NavLink>
                       </li>
                     ))}
@@ -73,7 +76,7 @@ export default function Navbar() {
                 )}
               </li>
             ) : (
-              <li key={item.to}>
+              <li key={item.id}>
                 <NavLink to={item.to} end={item.to === "/"}>{item.label}</NavLink>
               </li>
             )

@@ -6,35 +6,37 @@ import Photo from "../components/Photo.jsx";
 import Section from "../components/Section.jsx";
 import Timeline from "../components/Timeline.jsx";
 import { Link } from "react-router-dom";
-import { RETURNING_DATES } from "../data/site.js";
+import { RETURNING_DATES, RETURNING_MEMBERS_PAGE } from "../data/site.js";
 
 // returning mbr info
 export default function ReturningMembers() {
+  const { header, beginnerCallout, datesHeading, reenrollment, auditions, opportunities } = RETURNING_MEMBERS_PAGE;
+
   return (
     <>
-      <PageHeader title="Returning Members" intro="Welcome back! Here is what you need for the new year." />
+      <PageHeader {...header} />
       <Section>
-        <div className="callout">New to orchestra? <Link to="/new-to-orchestra">Start here.</Link></div>
+        <div className="callout">{beginnerCallout.text}{" "}<Link to="/new-to-orchestra">{beginnerCallout.label}</Link></div>
       </Section>
       {/* key dates */}
-      <Section title="Key dates"><Timeline items={RETURNING_DATES} /></Section>
-      <Section title="Re-enrollment and instruments">
+      <Section title={datesHeading}><Timeline items={RETURNING_DATES} /></Section>
+      <Section title={reenrollment.heading}>
         <div className="split">
-          <Checklist items={["Complete registration", "Submit forms and fees", "Renew rental or size up", "Review handbook updates"]} />
-          <Photo label="Photo: returning students" height={220} />
+          <Checklist items={reenrollment.checklist} />
+          <Photo {...reenrollment.photo} height={220} />
         </div>
       </Section>
-      <Section title="Auditions and seating">
+      <Section title={auditions.heading}>
         <div className="grid grid-2">
-          <Card title="Chair placement">[Process and dates.]</Card>
-          <Card title="Advanced groups">[Details about special ensembles.]</Card>
+          <Card title={auditions.chairPlacement.title}>{auditions.chairPlacement.text}</Card>
+          <Card title={auditions.advancedGroups.title}>{auditions.advancedGroups.text}</Card>
         </div>
       </Section>
-      <Section title="Opportunities">
+      <Section title={opportunities.heading}>
         <div className="grid grid-3">
-          <Card title="UIL & other groups" to="/uil" cta="Learn more">Contests and extra ensembles.</Card>
-          <Card title="Leadership roles">[Section leaders and officers.]</Card>
-          <Card title="Performances">[Concerts and events this year.]</Card>
+          <Card title={opportunities.uil.title} to="/uil" cta={opportunities.uil.cta}>{opportunities.uil.text}</Card>
+          <Card title={opportunities.leadership.title}>{opportunities.leadership.text}</Card>
+          <Card title={opportunities.performances.title}>{opportunities.performances.text}</Card>
         </div>
       </Section>
       <ContactCards />

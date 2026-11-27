@@ -3,7 +3,7 @@ export default function Timeline({ items }) {
   return (
     <ol className="timeline" style={{ listStyle: "none", margin: 0 }}>
       {items.map((item) => (
-        <li key={item.title}>
+        <li key={item.id}>
           <div className="dot" />
           <div className="date">{item.date}</div>
           <h3>{item.title}</h3>

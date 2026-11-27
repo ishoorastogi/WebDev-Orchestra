@@ -3,7 +3,7 @@ export default function Accordion({ items }) {
   return (
     <div className="faq">
       {items.map((item) => (
-        <details key={item.q}>
+        <details key={item.id}>
           <summary>{item.q}</summary>
           <p>{item.a}</p>
         </details>

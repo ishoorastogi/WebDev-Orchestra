@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { NAV, SCHOOL, BOOSTER_URL, DIRECTOR_EMAIL } from "../data/site.js";
+import { FOOTER_CONTENT, NAV } from "../data/site.js";
 
 export default function Footer() {
+  const { heading, email, boosterLabel, boosterUrl, pagesHeading } = FOOTER_CONTENT;
   // top-level links only
   const pages = NAV.filter((n) => n.to);
   return (
@@ -9,15 +10,15 @@ export default function Footer() {
       <div className="container footer-grid">
         <div>
           {/* contact col */}
-          <h3>{SCHOOL}</h3>
-          <a href={`mailto:${DIRECTOR_EMAIL}`}>{DIRECTOR_EMAIL}</a>
-          <a href={BOOSTER_URL} target="_blank" rel="noopener noreferrer">Booster website</a>
+          <h3>{heading}</h3>
+          <a href={`mailto:${email}`}>{email}</a>
+          <a href={boosterUrl} target="_blank" rel="noopener noreferrer">{boosterLabel}</a>
         </div>
         <div>
           {/* sitemap col */}
-          <h3>Pages</h3>
+          <h3>{pagesHeading}</h3>
           {pages.map((p) => (
-            <Link key={p.to} to={p.to}>{p.label}</Link>
+            <Link key={p.id} to={p.to}>{p.label}</Link>
           ))}
         </div>
       </div>

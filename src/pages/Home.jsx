@@ -3,48 +3,58 @@ import Card from "../components/Card.jsx";
 import CtaBand from "../components/CtaBand.jsx";
 import Photo from "../components/Photo.jsx";
 import Section from "../components/Section.jsx";
-import { SCHOOL } from "../data/site.js";
+import { HOME_PAGE } from "../data/site.js";
 
 // landing page
 export default function Home() {
+  const { hero, quickLinks, gallery, cta } = HOME_PAGE;
+  const quickLinkCards = [
+    { ...quickLinks.newToOrchestra, to: "/new-to-orchestra" },
+    { ...quickLinks.returningMembers, to: "/returning-members" },
+    { ...quickLinks.gettingAnInstrument, to: "/getting-an-instrument" },
+  ];
+
   return (
     <>
       <Section>
         {/* maroon hero */}
         <div className="panel">
           <div>
-            <h1>Welcome to Durham Orchestra</h1>
-            <p>[Short welcome from the directors about the orchestra program at {SCHOOL}.]</p>
+            <h1>{hero.title}</h1>
+            <p>{hero.welcome}</p>
             <div className="btn-row">
-              <Button to="/new-to-orchestra" variant="light">Join Orchestra</Button>
-              <Button to="/returning-members" variant="ghost">Returning Members</Button>
+              <Button to="/new-to-orchestra" variant="light">{hero.joinLabel}</Button>
+              <Button to="/returning-members" variant="ghost">{hero.returningLabel}</Button>
             </div>
           </div>
-          <Photo label="Hero photo: orchestra performing" height={300} />
+          <Photo {...hero.photo} height={300} />
         </div>
       </Section>
       {/* quick links */}
-      <Section title="Quick links">
+      <Section title={quickLinks.heading}>
         <div className="grid grid-3">
-          <Card title="New to Orchestra" to="/new-to-orchestra" cta="Learn more">Meet the instruments and pick one.</Card>
-          <Card title="Returning Members" to="/returning-members" cta="Get started">Re-enrollment, auditions, and dates.</Card>
-          <Card title="Getting an Instrument" to="/getting-an-instrument" cta="Rent or borrow">Rental options and school instruments.</Card>
+          {quickLinkCards.map(({ title, to, cta, text }) => (
+            <Card key={to} title={title} to={to} cta={cta}>{text}</Card>
+          ))}
         </div>
       </Section>
       {/* gallery, view only */}
-      <Section title="Photo gallery">
+      <Section title={gallery.heading}>
         <div className="grid grid-4">
-          {[1, 2, 3, 4].map((n) => (
-            <Photo key={n} label={`Photo ${n}`} height={170} />
+          {gallery.photos.map((photo) => (
+            <Photo key={photo.id} {...photo} height={170} />
           ))}
         </div>
-        <p className="notice">Photos are for viewing only.</p>
+        <p className="notice">{gallery.notice}</p>
       </Section>
       <Section>
         <CtaBand
-          title="Ready to join the orchestra?"
-          text="Start with the instruments or meet the directors."
-          actions={[{ label: "New to Orchestra", to: "/new-to-orchestra" }, { label: "Meet the directors", to: "/directors" }]}
+          title={cta.title}
+          text={cta.text}
+          actions={[
+            { id: "learn-to-join", label: cta.newToOrchestraLabel, to: "/new-to-orchestra" },
+            { id: "meet-the-directors", label: cta.directorsLabel, to: "/directors" },
+          ]}
         />
       </Section>
     </>

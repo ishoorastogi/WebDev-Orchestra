@@ -11,7 +11,7 @@ export default function CtaBand({ title, text, actions = [] }) {
       <div className="btn-row">
         {/* 1st btn white, rest outlined */}
         {actions.map((a, i) => (
-          <Button key={a.label} variant={i === 0 ? "light" : "ghost"} to={a.to} href={a.href}>{a.label}</Button>
+          <Button key={a.id} variant={i === 0 ? "light" : "ghost"} to={a.to} href={a.href}>{a.label}</Button>
         ))}
       </div>
     </div>

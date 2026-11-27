@@ -1,3 +1,5 @@
+import { SHARED_CONTENT } from "../data/site.js";
+
 // yt embed, no cookies
 export default function Video({ videoId, title }) {
   return (
@@ -12,7 +14,7 @@ export default function Video({ videoId, title }) {
           allowFullScreen
         />
       ) : (
-        <div className="empty">Video coming soon: {title}</div>
+        <div className="empty">{SHARED_CONTENT.media.videoPlaceholder.replace("{title}", () => title)}</div>
       )}
     </div>
   );

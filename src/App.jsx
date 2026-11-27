@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { applyBrowserMetadata } from "./browserMetadata.js";
+import { SITE_METADATA } from "./data/site.js";
 import Layout from "./components/Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Directors from "./pages/Directors.jsx";
@@ -8,7 +11,12 @@ import ReturningMembers from "./pages/ReturningMembers.jsx";
 import Uil from "./pages/Uil.jsx";
 
 // all routes live here
-export default function App() {
+export default function App({ metadata = SITE_METADATA }) {
+  const { title, language } = metadata;
+  useEffect(() => {
+    applyBrowserMetadata({ title, language });
+  }, [title, language]);
+
   // pages sit inside the layout
   return (
     <Routes>

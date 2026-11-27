@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SHARED_CONTENT, SITE_METADATA } from "../data/site.js";
 
 // en/es toggle — UI only for now. translation is not wired up yet.
 // the buttons switch their active state but nothing on the page changes.
@@ -6,7 +7,8 @@ import { useState } from "react";
 //   (previous version used the google translate widget via a "googtrans" cookie + page reload)
 
 export default function LanguageToggle() {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(SITE_METADATA.language);
+  const { label, options } = SHARED_CONTENT.language;
 
   function setLanguage(next) {
     setLang(next);
@@ -15,10 +17,10 @@ export default function LanguageToggle() {
 
   // en/es btns
   return (
-    <div className="lang" role="group" aria-label="Language">
-      <button aria-pressed={lang === "en"} onClick={() => setLanguage("en")}>EN</button>
-      <button aria-pressed={lang === "es"} onClick={() => setLanguage("es")}>ES</button>
-      <button aria-pressed={lang === "idk"} onClick={() => setLanguage("idk")}>IDK</button>
+    <div className="lang" role="group" aria-label={label}>
+      {options.map(({ id, value, label: optionLabel }) => (
+        <button key={id} aria-pressed={lang === value} onClick={() => setLanguage(value)}>{optionLabel}</button>
+      ))}
     </div>
   );
 }
