@@ -83,13 +83,15 @@ img { max-width: 100%; display: block; }
 .lang button { border: 0; background: var(--white); color: var(--maroon); padding: 6px 12px; font: 700 14px var(--font-body); cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--maroon); color: var(--white); }
 .nav-toggle { display: none; background: var(--white); border: 1.5px solid var(--maroon); color: var(--maroon); border-radius: var(--radius-btn); padding: 8px 12px; font-weight: 700; cursor: pointer; }
-.nav-links { list-style: none; display: flex; gap: 24px; margin: 0 auto; padding: 0 24px 8px; max-width: var(--max); }
+.nav-links { list-style: none; display: flex; gap: 8px; margin: 0 auto; padding: 0 24px 8px; max-width: var(--max); }
 .nav-links > li { position: relative; }
-.nav-links a, .nav-links button { display: inline-block; vertical-align: top; color: var(--maroon); font: 700 14px var(--font-body); text-decoration: none; background: none; border: 0; padding: 8px 0; cursor: pointer; border-bottom: 3px solid transparent; }
+.nav-links a, .nav-links button { display: inline-block; vertical-align: top; color: var(--maroon); font: 700 14px var(--font-body); text-decoration: none; background: none; border: 0; padding: 8px; cursor: pointer; border-bottom: 3px solid transparent; }
 .nav-links a.active, .nav-links button.active { border-bottom-color: var(--maroon); }
 .dropdown { position: absolute; top: 100%; left: 0; min-width: 240px; background: var(--white); box-shadow: var(--shadow); border-radius: var(--radius-card); list-style: none; margin: 0; padding: 8px; z-index: 60; }
 .nav-links > li:last-child > .dropdown { left: auto; right: 0; }
 .dropdown a { display: block; padding: 10px 12px; border: 0; }
+.nav-links > li > a:hover,
+.nav-links > li > button:hover,
 .dropdown a:hover { background: var(--blush); }
 
 /* page header + hero */

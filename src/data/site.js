@@ -5,6 +5,7 @@ export const SCHOOL = "Durham Middle School Orchestra";
 export const BOOSTER_URL = "https://example.com/booster"; // todo: existing booster website
 export const DIRECTOR_EMAIL = "director@example.org"; // todo
 export const HANDBOOK_LINK = { label: "Handbook", to: "/handbook" };
+export const CALENDAR_LINK = { label: "Calendar", to: "/calendar" };
 
 // nav links, children = dropdown
 export const NAV = [
@@ -14,8 +15,7 @@ export const NAV = [
   { label: "Getting an Instrument", to: "/getting-an-instrument" },
   { label: "Returning Members", to: "/returning-members" },
   { label: "UIL & Groups", to: "/uil" },
-  { label: "Resources", children: [HANDBOOK_LINK] },
-  { label: "Calendar", to: "/calendar" },
+  { label: "Resources", children: [HANDBOOK_LINK, CALENDAR_LINK] },
 ];
 
 // dir info, edit here
